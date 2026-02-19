@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دقة التخطيط للمقاولات</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts (Tajawal for Arabic) -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f9fafb;
+            color: #1e293b;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #b8860b; /* ذهبي */
+            line-height: 1.2;
+        }
+        .logo span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #4b5563;
+            display: block;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #1e293b;
+            transition: color 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: #b8860b;
+        }
+
+        .lang-switch {
+            background-color: #f3f4f6;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .lang-switch:hover {
+            background-color: #e5e7eb;
+        }
+
+        /* Mobile menu */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: #b8860b;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #9e7409;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(184,134,11,0.2);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #b8860b;
+            color: #b8860b;
+            margin-right: 1rem;
+        }
+        .btn-outline:hover {
+            background-color: #b8860b;
+            color: white;
+        }
+
+        /* Hero Slider */
+        .hero-slider {
+            position: relative;
+            height: 90vh;
+            min-height: 600px;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .slide::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(11,26,46,0.85) 0%, rgba(26,47,64,0.75) 100%);
+            z-index: 1;
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+
+        .slide-content .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .slide-text {
+            flex: 1 1 500px;
+        }
+
+        .slide-text h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #eab308;
+            margin-bottom: 0.5rem;
+            transform: translateY(30px);
+            opacity: 0;
+            transition: all 0.6s ease 0.3s;
+        }
+
+        .slide.active .slide-text h2 {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .slide-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            transform: translateY(30px);
+            opacity: 0;
+            transition: all 0.6s ease 0.5s;
+        }
+
+        .slide.active .slide-text h1 {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .slide-text h1 span {
+            color: #b8860b;
+            display: block;
+            font-size: 2.2rem;
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        .slide-buttons {
+            margin-top: 2rem;
+            transform: translateY(30px);
+            opacity: 0;
+            transition: all 0.6s ease 0.7s;
+        }
+
+        .slide.active .slide-buttons {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .slide-image {
+            flex: 1 1 300px;
+            text-align: center;
+            transform: translateX(50px);
+            opacity: 0;
+            transition: all 0.8s ease 0.6s;
+        }
+
+        .slide.active .slide-image {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .slide-image img {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            max-height: 400px;
+            width: auto;
+        }
+
+        /* Slider Controls */
+        .slider-controls {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .slider-dots {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            background-color: #b8860b;
+            transform: scale(1.3);
+        }
+
+        .slider-arrow {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .slider-arrow:hover {
+            background: #b8860b;
+            border-color: #b8860b;
+        }
+
+        /* Section general */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #0b1a2e;
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: #6b7280;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+        }
+
+        .title-accent {
+            width: 80px;
+            height: 4px;
+            background: #b8860b;
+            margin: 0 auto 1.5rem;
+        }
+
+        /* About summary */
+        .about-summary {
+            background-color: white;
+            border-radius: 30px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .about-text {
+            flex: 2 1 300px;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-highlights {
+            flex: 1 1 200px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 20px;
+            border-right: 4px solid #b8860b;
+        }
+
+        .highlight-item i {
+            font-size: 1.8rem;
+            color: #b8860b;
+        }
+
+        /* Services cards */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 30px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            border: 1px solid #f1f5f9;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(184,134,11,0.1);
+            border-color: #b8860b;
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: #fef3e2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .service-icon i {
+            font-size: 2.5rem;
+            color: #b8860b;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Stats */
+        .stats-section {
+            background: linear-gradient(135deg, #0b1a2e, #1e3a5f);
+            color: white;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 3rem;
+        }
+
+        .stat-item {
+            flex: 1 1 200px;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #b8860b;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Projects slider */
+        .projects-slider {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-item {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        .project-item:hover {
+            transform: scale(1.03);
+        }
+
+        .project-img {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-info h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-info p i {
+            color: #b8860b;
+            margin-left: 0.3rem;
+        }
+
+        /* Certificates */
+        .certificates {
+            background: white;
+            padding: 2rem;
+            border-radius: 50px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .cert-item {
+            filter: grayscale(1);
+            opacity: 0.7;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .cert-item:hover {
+            filter: grayscale(0);
+            opacity: 1;
+        }
+
+        .cert-item i {
+            font-size: 4rem;
+            color: #2c3e50;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0f172a;
+            color: #cbd5e1;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-col p {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col i {
+            color: #b8860b;
+            margin-left: 0.5rem;
+            width: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #b8860b;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            font-size: 0.9rem;
+        }
+
+        /* RTL adjustments */
+        .footer-col i {
+            margin-left: 0.5rem;
+            margin-right: 0;
+        }
+
+        @media (max-width: 992px) {
+            .navbar {
+                flex-wrap: wrap;
+            }
+            .nav-menu {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem 0;
+            }
+            .nav-menu.show {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .slide-text h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide-content .container {
+                flex-direction: column;
+                text-align: center;
+                justify-content: center;
+            }
+            .slide-buttons {
+                display: flex;
+                justify-content: center;
+            }
+            .slide-image {
+                display: none;
+            }
+            .about-summary {
+                flex-direction: column;
+                text-align: center;
+            }
+            .highlight-item {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <h1>دقة التخطيط</h1>
+                    <span>للمقاولات العامة</span>
+                </div>
+                <div class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#" class="active">الرئيسية</a></li>
+                    <li><a href="aboutUs.html">من نحن</a></li>
+                    <li><a href="Services.html">خدماتنا</a></li>
+                    <li><a href="Projects.html">أعمالنا</a></li>
+                    <li><a href="Certificates.html">الشهادات</a></li>
+                    <li><a href="Safety.html">الأمن والسلامة</a></li>
+                    <li><a href="Contact.html"> تواصل معنا</a></li>
+                </ul>
+                <button class="lang-switch">English</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Slider Section -->
+        <section class="hero-slider">
+            <!-- Slide 1 -->
+            <div class="slide active" id="slide1">
+                <div class="slide-bg" style="background-image: url('https://images.pexels.com/photos/159306/construction-site-build-construction-work-159306.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');"></div>
+                <div class="slide-content">
+                    <div class="container">
+                        <div class="slide-text">
+                            <h2>مؤسسة دقة التخطيط للمقاولات</h2>
+                            <h1>دقة في التنفيذ…<span>التزام في الجودة</span></h1>
+                            <div class="slide-buttons">
+                                <a href="#" class="btn btn-primary">تواصل معنا</a>
+                                <a href="#" class="btn btn-outline">أعمالنا</a>
+                            </div>
+                        </div>
+                        <div class="slide-image">
+                            <img src="https://images.pexels.com/photos/236307/pexels-photo-236307.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="مشروع بناء">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slide" id="slide2">
+                <div class="slide-bg" style="background-image: url('https://images.pexels.com/photos/2825379/pexels-photo-2825379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');"></div>
+                <div class="slide-content">
+                    <div class="container">
+                        <div class="slide-text">
+                            <h2>خبرة 20 عام في العطاء</h2>
+                            <h1>نبني اليوم…<span>للغد الأفضل</span></h1>
+                            <div class="slide-buttons">
+                                <a href="#" class="btn btn-primary">مشاريعنا</a>
+                                <a href="#" class="btn btn-outline">من نحن</a>
+                            </div>
+                        </div>
+                        <div class="slide-image">
+                            <img src="https://images.pexels.com/photos/380768/pexels-photo-380768.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="مهندسين في الموقع">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slide" id="slide3">
+                <div class="slide-bg" style="background-image: url('https://images.pexels.com/photos/262367/pexels-photo-262367.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');"></div>
+                <div class="slide-content">
+                    <div class="container">
+                        <div class="slide-text">
+                            <h2>مصنفة درجة أولى</h2>
+                            <h1>جودة وسلامة…<span>بمعايير عالمية</span></h1>
+                            <div class="slide-buttons">
+                                <a href="#" class="btn btn-primary">اعتماداتنا</a>
+                                <a href="#" class="btn btn-outline">اتصل بنا</a>
+                            </div>
+                        </div>
+                        <div class="slide-image">
+                            <img src="https://images.pexels.com/photos/7241405/pexels-photo-7241405.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="مشروع حديث">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slider Controls -->
+            <div class="slider-controls">
+                <div class="slider-arrow prev" onclick="changeSlide(-1)">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="slider-dots">
+                    <span class="dot active" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
+                </div>
+                <div class="slider-arrow next" onclick="changeSlide(1)">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Summary -->
+        <section class="section">
+            <div class="container">
+                <div class="about-summary">
+                    <div class="about-text">
+                        <h3>من نحن</h3>
+                        <p>مؤسسة دقة التخطيط للمقاولات العامة، خبرة تمتد لأكثر من 20 عاماً في تنفيذ المشاريع الكبرى. مصنفة درجة أولى ومعتمدون من الجهات الحكومية، نقدم حلولاً متكاملة في البناء والتشييد وفق أعلى معايير الجودة والسلامة.</p>
+                    </div>
+                    <div class="about-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>خبرة 20 عام</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-award"></i>
+                            <span>مصنفة درجة أولى</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>معتمدين حكوميًا</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services -->
+        <section class="section" style="background-color: #f8fafc;">
+            <div class="container">
+                <div class="section-title">
+                    <div class="title-accent"></div>
+                    <h2>خدماتنا</h2>
+                    <p>نقدم مجموعة متكاملة من الخدمات الهندسية والإنشائية</p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-building"></i></div>
+                        <h3>البناء والتشييد</h3>
+                        <p>تنفيذ المباني السكنية والتجارية بأعلى جودة</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-road"></i></div>
+                        <h3>البنية التحتية</h3>
+                        <p>شبكات المياه والصرف الصحي والطرق</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-tasks"></i></div>
+                        <h3>إدارة المشاريع</h3>
+                        <p>إدارة احترافية للمشاريع من البداية إلى التسليم</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-hammer"></i></div>
+                        <h3>الترميم والصيانة</h3>
+                        <p>ترميم المباني الأثرية والتجارية</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-industry"></i></div>
+                        <h3>الإنشاءات الصناعية</h3>
+                        <p>مصانع ومستودعات وهناجر</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-leaf"></i></div>
+                        <h3>الخدمات البيئية</h3>
+                        <p>حلول مستدامة وصديقة للبيئة</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="section stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">+20</div>
+                        <div class="stat-label">سنة خبرة</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">+150</div>
+                        <div class="stat-label">مشروع منجز</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">+50</div>
+                        <div class="stat-label">عميل دائم</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">التزام بالجودة</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <div class="title-accent"></div>
+                    <h2>مشاريع مختارة</h2>
+                    <p>نماذج من أعمالنا التي نفتخر بها</p>
+                </div>
+                <div class="projects-slider">
+                    <div class="project-item">
+                        <div class="project-img" style="background-image: url('https://images.pexels.com/photos/159306/construction-site-build-construction-work-159306.jpeg?auto=compress&cs=tinysrgb&w=600');"></div>
+                        <div class="project-info">
+                            <h4>مشروع أوقاف الشيخ يوسف العريني</h4>
+                            <p><i class="fas fa-map-marker-alt"></i> البدائع</p>
+                        </div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-img" style="background-image: url('https://images.pexels.com/photos/2825379/pexels-photo-2825379.jpeg?auto=compress&cs=tinysrgb&w=600');"></div>
+                        <div class="project-info">
+                            <h4>مدرسة نموذج 18/2</h4>
+                            <p><i class="fas fa-map-marker-alt"></i> القصيم</p>
+                        </div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-img" style="background-image: url('https://images.pexels.com/photos/262367/pexels-photo-262367.jpeg?auto=compress&cs=tinysrgb&w=600');"></div>
+                        <div class="project-info">
+                            <h4>صيانة طرق محافظة البكيرية</h4>
+                            <p><i class="fas fa-map-marker-alt"></i> البكيرية</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certificates -->
+        <section class="section" style="background-color: #f1f5f9;">
+            <div class="container">
+                <div class="section-title">
+                    <div class="title-accent"></div>
+                    <h2>شهادات واعتمادات</h2>
+                    <p>ثقة الجهات الرسمية والخاصة</p>
+                </div>
+                <div class="certificates">
+                    <div class="cert-item"><i class="fas fa-certificate"></i><br>ISO 9001</div>
+                    <div class="cert-item"><i class="fas fa-award"></i><br>تصنيف أول</div>
+                    <div class="cert-item"><i class="fas fa-trophy"></i><br>أمانة القصيم</div>
+                    <div class="cert-item"><i class="fas fa-building"></i><br>وزارة الإسكان</div>
+                    <div class="cert-item"><i class="fas fa-hard-hat"></i><br>السلامة المهنية</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>دقة التخطيط</h3>
+                    <p>شريكك الموثوق في عالم البناء والمقاولات، دقة في التنفيذ والتزام بالجودة منذ 20 عاماً.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">الرئيسية</a></li>
+                        <li><a href="#">من نحن</a></li>
+                        <li><a href="#">خدماتنا</a></li>
+                        <li><a href="#">المشاريع</a></li>
+                        <li><a href="#">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>معلومات الاتصال</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> القصيم – البكيرية</p>
+                    <p><i class="fas fa-phone"></i> 050 948 5115</p>
+                    <p><i class="fas fa-envelope"></i> info@deqataltakhtit.com</p>
+                    <p><i class="fas fa-globe"></i> www.deqataltakhtit.com</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 مؤسسة دقة التخطيط للمقاولات. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('show');
+        });
+
+        // Slider functionality
+        let currentSlideIndex = 1;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+
+        function showSlide(index) {
+            // Handle index bounds
+            if (index > slides.length) currentSlideIndex = 1;
+            if (index < 1) currentSlideIndex = slides.length;
+            
+            // Hide all slides
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Remove active class from all dots
+            dots.forEach(dot => {
+                dot.classList.remove('active');
+            });
+            
+            // Show current slide and activate corresponding dot
+            slides[currentSlideIndex - 1].classList.add('active');
+            dots[currentSlideIndex - 1].classList.add('active');
+        }
+
+        function changeSlide(direction) {
+            currentSlideIndex += direction;
+            showSlide(currentSlideIndex);
+        }
+
+        function currentSlide(index) {
+            currentSlideIndex = index;
+            showSlide(currentSlideIndex);
+        }
+
+        // Auto slide change every 5 seconds
+        setInterval(() => {
+            changeSlide(1);
+        }, 5000);
+    </script>
+</body>
+</html>

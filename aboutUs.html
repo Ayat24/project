@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>من نحن - دقة التخطيط للمقاولات</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts (Tajawal for Arabic) -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f9fafb;
+            color: #1e293b;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* Header & Navigation (مطابق للصفحة الرئيسية) */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #b8860b;
+            line-height: 1.2;
+        }
+        .logo span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #4b5563;
+            display: block;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #1e293b;
+            transition: color 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: #b8860b;
+        }
+
+        .lang-switch {
+            background-color: #f3f4f6;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .lang-switch:hover {
+            background-color: #e5e7eb;
+        }
+
+        /* Mobile menu */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #0b1a2e 0%, #1e3a5f 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.pexels.com/photos/159306/construction-site-build-construction-work-159306.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') center/cover no-repeat;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .page-header .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: #e2e8f0;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Section general */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #0b1a2e;
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: #6b7280;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+        }
+
+        .title-accent {
+            width: 80px;
+            height: 4px;
+            background: #b8860b;
+            margin: 0 auto 1.5rem;
+        }
+
+        /* About Introduction */
+        .about-intro {
+            background-color: white;
+            border-radius: 40px;
+            padding: 4rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            margin-top: -3rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .about-intro p {
+            font-size: 1.3rem;
+            line-height: 2;
+            color: #334155;
+            text-align: justify;
+        }
+
+        .about-intro strong {
+            color: #b8860b;
+            font-size: 1.5rem;
+        }
+
+        /* Chairman Message */
+        .chairman-section {
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+        }
+
+        .chairman-card {
+            background: white;
+            border-radius: 50px;
+            padding: 3rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            align-items: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .chairman-img {
+            flex: 1 1 250px;
+            text-align: center;
+        }
+
+        .chairman-img i {
+            font-size: 10rem;
+            color: #b8860b;
+            background: #fef3e2;
+            padding: 2rem;
+            border-radius: 50%;
+            border: 4px solid #b8860b;
+        }
+
+        .chairman-message {
+            flex: 3 1 500px;
+        }
+
+        .chairman-message h3 {
+            font-size: 2rem;
+            color: #0b1a2e;
+            margin-bottom: 0.5rem;
+        }
+
+        .chairman-title {
+            color: #b8860b;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            border-bottom: 2px solid #b8860b;
+            padding-bottom: 0.5rem;
+        }
+
+        .chairman-message p {
+            font-size: 1.2rem;
+            line-height: 1.9;
+            color: #334155;
+            font-style: italic;
+            position: relative;
+            padding-right: 2rem;
+        }
+
+        .chairman-message p::before {
+            content: "“";
+            font-size: 4rem;
+            color: #b8860b;
+            position: absolute;
+            right: -1rem;
+            top: -1rem;
+            opacity: 0.3;
+        }
+
+        /* Vision Mission Values */
+        .vmv-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .vmv-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            transition: all 0.3s;
+            border: 1px solid #f1f5f9;
+        }
+
+        .vmv-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(184,134,11,0.1);
+            border-color: #b8860b;
+        }
+
+        .vmv-icon {
+            width: 100px;
+            height: 100px;
+            background: #fef3e2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+        }
+
+        .vmv-icon i {
+            font-size: 3rem;
+            color: #b8860b;
+        }
+
+        .vmv-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #0b1a2e;
+        }
+
+        .vmv-card p {
+            color: #4b5563;
+            line-height: 1.8;
+        }
+
+        .values-list {
+            list-style: none;
+            text-align: right;
+            margin-top: 1rem;
+        }
+
+        .values-list li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .values-list i {
+            color: #b8860b;
+        }
+
+        /* Timeline / History */
+        .timeline {
+            background-color: white;
+            border-radius: 40px;
+            padding: 3rem;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-year {
+            min-width: 120px;
+            font-size: 2rem;
+            font-weight: 800;
+            color: #b8860b;
+        }
+
+        .timeline-content {
+            border-right: 3px solid #e2e8f0;
+            padding-right: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        .timeline-content h4 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer (مطابق للصفحة الرئيسية) */
+        footer {
+            background-color: #0f172a;
+            color: #cbd5e1;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-col p {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col i {
+            color: #b8860b;
+            margin-left: 0.5rem;
+            width: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #b8860b;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .navbar {
+                flex-wrap: wrap;
+            }
+            .nav-menu {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem 0;
+            }
+            .nav-menu.show {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .about-intro {
+                padding: 2rem;
+            }
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .timeline-item {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .timeline-content {
+                border-right: none;
+                padding-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <h1>دقة التخطيط</h1>
+                    <span>للمقاولات العامة</span>
+                </div>
+                <div class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="aboutUs.html" class="active">من نحن</a></li>
+                    <li><a href="Services.html">خدماتنا</a></li>
+                    <li><a href="Projects.html">أعمالنا</a></li>
+                    <li><a href="Certificates.html">الشهادات</a></li>
+                    <li><a href="Safety.html">الأمن والسلامة</a></li>
+                    <li><a href="Contact.html">تواصل معنا </a></li>
+                </ul>
+                <button class="lang-switch">English</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1>من نحن</h1>
+                <p>نضع الجودة والدقة في مقدمة أولوياتنا لبناء مستقبل أفضل للمملكة</p>
+            </div>
+        </section>
+
+        <!-- About Introduction -->
+        <section class="section" style="padding-top: 2rem;">
+            <div class="container">
+                <div class="about-intro">
+                    <p>
+                        <strong>مؤسسة دقة التخطيط للمقاولات العامة</strong> هي مؤسسة وطنية رائدة في مجال المقاولات والبناء، 
+                        تأسست لتلبية احتياجات السوق السعودي من مشاريع البناء والتشييد بأعلى معايير الجودة والدقة. 
+                        نمتلك خبرة تمتد لأكثر من <strong>20 عاماً</strong> في تنفيذ المشاريع الكبرى، بدءاً من المباني السكنية 
+                        والتجارية وصولاً إلى مشاريع البنية التحتية الضخمة. نحن <strong>مصنفون درجة أولى</strong> ومعتمدون 
+                        من جميع الجهات الحكومية، ونفخر بفريقنا الهندسي والإداري الذي يضم نخبة من الخبراء 
+                        والمتخصصين. نؤمن بأن النجاح الحقيقي يتحقق من خلال الالتزام بالوعود والدقة في المواعيد 
+                        والجودة في التنفيذ، وهذا ما جعلنا الشريك الموثوق لأكبر الجهات الحكومية والخاصة في المملكة.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chairman Message -->
+        <section class="section chairman-section">
+            <div class="container">
+                <div class="section-title">
+                    <div class="title-accent"></div>
+                    <h2>كلمة رئيس مجلس الإدارة</h2>
+                    <p>رؤيتنا تنطلق من قيادة حكيمة</p>
+                </div>
+                <div class="chairman-card">
+                    <div class="chairman-img">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="chairman-message">
+                        <h3>م.    </h3>
+                        <div class="chairman-title">رئيس مجلس الإدارة</div>
+                        <p>
+                            الحمد لله الذي بنعمته تتم الصالحات، والصلاة والسلام على نبينا محمد. 
+                            يسعدني نيابة عن كافة منسوبي مؤسسة دقة التخطيط أن أرحب بكم في موقعنا الإلكتروني. 
+                            منذ انطلاقتنا ونحن نضع نصب أعيننا هدفاً واحداً: أن نكون الأفضل في مجال المقاولات 
+                            من خلال الالتزام بالدقة والجودة. شرفنا بالمشاركة في بناء العديد من المشاريع الوطنية 
+                            الكبرى، وهذا لم يكن ليتحقق لولا ثقة عملائنا الكرام أولاً، ثم بجهود فريق عملنا المخلص. 
+                            نعدكم بأن نبقى أوفياء لشعارنا "دقة في التنفيذ… التزام في الجودة"، ونسأل الله التوفيق 
+                            والسداد لخدمة ديننا ثم وطننا.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vision, Mission, Values -->
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <div class="title-accent"></div>
+                    <h2>رؤيتنا - رسالتنا - قيمنا</h2>
+                    <p>أسس تميزنا في عالم البناء والمقاولات</p>
+                </div>
+                <div class="vmv-grid">
+                    <!-- Vision -->
+                    <div class="vmv-card">
+                        <div class="vmv-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3>رؤيتنا</h3>
+                        <p>أن نكون الخيار الأول في قطاع المقاولات بالمملكة، ونموذجاً يُحتذى به في الدقة والجودة والابتكار، والمساهمة الفاعلة في تحقيق رؤية المملكة 2030 من خلال بناء مستقبل عمراني مستدام.</p>
+                    </div>
+                    
+                    <!-- Mission -->
+                    <div class="vmv-card">
+                        <div class="vmv-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3>رسالتنا</h3>
+                        <p>تقديم خدمات مقاولات متكاملة بجودة عالية والتزام بالجدول الزمني المحدد، باستخدام أحدث التقنيات والمواد، مع الحفاظ على أعلى معايير السلامة المهنية وحماية البيئة، وكسب ثقة عملائنا من خلال الشفافية والموثوقية.</p>
+                    </div>
+                    
+                    <!-- Values -->
+                    <div class="vmv-card">
+                        <div class="vmv-icon">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <h3>قيمنا</h3>
+                        <ul class="values-list">
+                            <li><i class="fas fa-check-circle"></i> الدقة والإتقان في العمل</li>
+                            <li><i class="fas fa-check-circle"></i> النزاهة والشفافية</li>
+                            <li><i class="fas fa-check-circle"></i> الالتزام بالمواعيد</li>
+                            <li><i class="fas fa-check-circle"></i> سلامة العمال والبيئة</li>
+                            <li><i class="fas fa-check-circle"></i> الابتكار والتطوير المستمر</li>
+                            <li><i class="fas fa-check-circle"></i> المسؤولية المجتمعية</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our History Timeline -->
+        <section class="section" style="background-color: #f8fafc;">
+            <div class="container">
+                <div class="section-title">
+                    <div class="title-accent"></div>
+                    <h2>مسيرتنا</h2>
+                    <p>20 عاماً من العطاء والإنجاز</p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">2005</div>
+                        <div class="timeline-content">
+                            <h4>تأسيس المؤسسة</h4>
+                            <p>انطلقت مؤسسة دقة التخطيط في البكيرية كمنشأة فردية متخصصة في أعمال البناء الصغيرة.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2012</div>
+                        <div class="timeline-content">
+                            <h4>أول مشروع حكومي</h4>
+                            <p>حصلنا على أول مشروع حكومي لصيانة الطرق بمحافظة البكيرية، وكان نقطة تحول في مسيرتنا.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2016</div>
+                        <div class="timeline-content">
+                            <h4>الحصول على التصنيف الأول</h4>
+                            <p>تم تصنيف المؤسسة من الدرجة الأولى من قبل وزارة الشؤون البلدية والقروية والإسكان.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2020</div>
+                        <div class="timeline-content">
+                            <h4>التوسع في المشاريع الكبرى</h4>
+                            <p>تنفيذ مشروع أوقاف الشيخ يوسف العريني بالبدائع، وإنشاء مدرسة نموذج 18/2 بالقصيم.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2025</div>
+                        <div class="timeline-content">
+                            <h4>اليوم ... نحو آفاق أوسع</h4>
+                            <p>نواصل مسيرنا بخطى ثابتة نحو التوسع ومواكبة رؤية المملكة 2030 في مشاريع البنية التحتية.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>دقة التخطيط</h3>
+                    <p>شريكك الموثوق في عالم البناء والمقاولات، دقة في التنفيذ والتزام بالجودة منذ 20 عاماً.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="#">من نحن</a></li>
+                        <li><a href="#">خدماتنا</a></li>
+                        <li><a href="#">المشاريع</a></li>
+                        <li><a href="#">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>معلومات الاتصال</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> القصيم – البكيرية</p>
+                    <p><i class="fas fa-phone"></i> 050 948 5115</p>
+                    <p><i class="fas fa-envelope"></i> info@deqataltakhtit.com</p>
+                    <p><i class="fas fa-globe"></i> www.deqataltakhtit.com</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 مؤسسة دقة التخطيط للمقاولات. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('show');
+        });
+    </script>
+</body>
+</html>

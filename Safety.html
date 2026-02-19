@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأمن والسلامة - دقة التخطيط للمقاولات</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts (Tajawal for Arabic) -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f9fafb;
+            color: #1e293b;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #b8860b;
+            line-height: 1.2;
+        }
+        .logo span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #4b5563;
+            display: block;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #1e293b;
+            transition: color 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: #b8860b;
+        }
+
+        .lang-switch {
+            background-color: #f3f4f6;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .lang-switch:hover {
+            background-color: #e5e7eb;
+        }
+
+        /* Mobile menu */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #0b1a2e 0%, #1e3a5f 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.pexels.com/photos/7241405/pexels-photo-7241405.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') center/cover no-repeat;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .page-header .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: #e2e8f0;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Section general */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #0b1a2e;
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: #6b7280;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+        }
+
+        .title-accent {
+            width: 80px;
+            height: 4px;
+            background: #b8860b;
+            margin: 0 auto 1.5rem;
+        }
+
+        /* Safety Policy */
+        .policy-section {
+            background: white;
+        }
+
+        .policy-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .policy-text {
+            flex: 2 1 500px;
+        }
+
+        .policy-text h3 {
+            font-size: 2rem;
+            color: #0b1a2e;
+            margin-bottom: 1.5rem;
+        }
+
+        .policy-text p {
+            font-size: 1.2rem;
+            line-height: 2;
+            color: #334155;
+            margin-bottom: 2rem;
+        }
+
+        .policy-stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .policy-stat {
+            text-align: center;
+        }
+
+        .policy-stat .number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #b8860b;
+        }
+
+        .policy-stat .label {
+            color: #6b7280;
+        }
+
+        .policy-image {
+            flex: 1 1 400px;
+        }
+
+        .policy-image img {
+            width: 100%;
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Safety Icons / Features */
+        .safety-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .safety-feature {
+            background: white;
+            padding: 2rem;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            transition: all 0.3s;
+            border: 1px solid #f1f5f9;
+        }
+
+        .safety-feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 40px rgba(184,134,11,0.15);
+            border-color: #b8860b;
+        }
+
+        .feature-icon {
+            width: 90px;
+            height: 90px;
+            background: #fef3e2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .safety-feature:hover .feature-icon {
+            background: #b8860b;
+        }
+
+        .feature-icon i {
+            font-size: 3rem;
+            color: #b8860b;
+            transition: all 0.3s;
+        }
+
+        .safety-feature:hover .feature-icon i {
+            color: white;
+        }
+
+        .safety-feature h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .safety-feature p {
+            color: #6b7280;
+        }
+
+        /* Safety Team */
+        .team-section {
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-member {
+            background: white;
+            border-radius: 40px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            transition: all 0.3s;
+            border: 1px solid #f1f5f9;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 40px rgba(184,134,11,0.15);
+            border-color: #b8860b;
+        }
+
+        .member-icon {
+            width: 120px;
+            height: 120px;
+            background: #fef3e2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            border: 4px solid #b8860b;
+        }
+
+        .member-icon i {
+            font-size: 4rem;
+            color: #b8860b;
+        }
+
+        .team-member h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-title {
+            color: #b8860b;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .member-cert {
+            color: #6b7280;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-cert i {
+            color: #b8860b;
+            margin-left: 0.3rem;
+        }
+
+        /* Safety Standards */
+        .standards-section {
+            background: white;
+        }
+
+        .standards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .standard-card {
+            background: #f8fafc;
+            border-radius: 30px;
+            padding: 2rem;
+            border-right: 5px solid #b8860b;
+            transition: all 0.3s;
+        }
+
+        .standard-card:hover {
+            transform: translateX(-10px);
+            box-shadow: 0 20px 30px rgba(184,134,11,0.1);
+        }
+
+        .standard-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #0b1a2e;
+        }
+
+        .standard-card p {
+            color: #4b5563;
+            line-height: 1.8;
+        }
+
+        .standard-card i {
+            color: #b8860b;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Compliance Section */
+        .compliance-section {
+            background: linear-gradient(135deg, #0b1a2e, #1e3a5f);
+            color: white;
+        }
+
+        .compliance-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .compliance-text {
+            flex: 2 1 500px;
+        }
+
+        .compliance-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .compliance-text p {
+            font-size: 1.2rem;
+            line-height: 1.9;
+            color: #e2e8f0;
+            margin-bottom: 2rem;
+        }
+
+        .compliance-list {
+            list-style: none;
+        }
+
+        .compliance-list li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .compliance-list i {
+            color: #b8860b;
+            font-size: 1.5rem;
+        }
+
+        .compliance-stats {
+            flex: 1 1 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .compliance-stat {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .compliance-stat .number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #b8860b;
+        }
+
+        .compliance-stat .label {
+            font-size: 1.1rem;
+            color: #e2e8f0;
+        }
+
+        /* Training Section */
+        .training-section {
+            background: white;
+        }
+
+        .training-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .training-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .training-item i {
+            font-size: 3rem;
+            color: #b8860b;
+            margin-bottom: 1rem;
+        }
+
+        .training-item h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .training-item p {
+            color: #6b7280;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0f172a;
+            color: #cbd5e1;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-col p {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col i {
+            color: #b8860b;
+            margin-left: 0.5rem;
+            width: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #b8860b;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .navbar {
+                flex-wrap: wrap;
+            }
+            .nav-menu {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem 0;
+            }
+            .nav-menu.show {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            .policy-content {
+                flex-direction: column-reverse;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <h1>دقة التخطيط</h1>
+                    <span>للمقاولات العامة</span>
+                </div>
+                <div class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="about.html">من نحن</a></li>
+                    <li><a href="services.html">خدماتنا</a></li>
+                    <li><a href="projects.html">أعمالنا</a></li>
+                    <li><a href="certificates.html">الشهادات</a></li>
+                    <li><a href="Safety.html" class="active">الأمن والسلامة</a></li>
+                    <li><a href="Contact.html">تواصل معنا</a></li>
+                </ul>
+                <button class="lang-switch">English</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1>الأمن والسلامة</h1>
+                <p>سلامة العاملين وحماية الموقع هي أولويتنا القصوى في كل مشروع</p>
+            </div>
+        </section>
+
+        <!-- Safety Policy -->
+        <section class="section policy-section">
+            <div class="container">
+                <div class="policy-content">
+                    <div class="policy-text">
+                        <h3>سياسة الأمن والسلامة</h3>
+                        <p>في <strong>مؤسسة دقة التخطيط</strong>، نؤمن بأن السلامة المهنية ليست مجرد إجراءات، بل هي ثقافة نغرسها في كل فرد من فريق العمل. نلتزم بتوفير بيئة عمل آمنة خالية من المخاطر، ونطبق أعلى معايير السلامة في جميع مواقعنا لضمان حماية العاملين والمعدات والبيئة المحيطة.</p>
+                        <div class="policy-stats">
+                            <div class="policy-stat">
+                                <div class="number">5,000+</div>
+                                <div class="label">ساعة تدريب سلامة</div>
+                            </div>
+                            <div class="policy-stat">
+                                <div class="number">0</div>
+                                <div class="label">حوادث خطيرة</div>
+                            </div>
+                            <div class="policy-stat">
+                                <div class="number">100%</div>
+                                <div class="label">امتثال للمعايير</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="policy-image">
+                        <img src="https://images.pexels.com/photos/7241405/pexels-photo-7241405.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="فريق الأمن والسلامة">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Safety Features -->
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <div class="title-accent"></div>
+                    <h2>مبادئ السلامة لدينا</h2>
+                    <p>أسس نتبعها لضمان أعلى مستويات الأمان</p>
+                </div>
+
+                <div class="safety-features">
+                    <div class="safety-feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>الوقاية أولاً</h3>
+                        <p>نركز على منع المخاطر قبل وقوعها من خلال التخطيط السليم والتقييم المستمر</p>
+                    </div>
+                    <div class="safety-feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <h3>تقييم المخاطر</h3>
+                        <p>نقوم بتقييم دوري للمخاطر في كل موقع وتحديث خطط السلامة باستمرار</p>
+                    </div>
+                    <div class="safety-feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-hard-hat"></i>
+                        </div>
+                        <h3>معدات الحماية</h3>
+                        <p>نوفر أحدث معدات الحماية الشخصية لجميع العاملين في الموقع</p>
+                    </div>
+                    <div class="safety-feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <h3>التدريب المستمر</h3>
+                        <p>برامج تدريبية دورية لرفع الوعي بثقافة السلامة لدى جميع الموظفين</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Safety Team -->
+        <section class="section team-section">
+            <div class="container">
+                <div class="section-title">
+                    <div class="title-accent"></div>
+                    <h2>فريق الأمن والسلامة</h2>
+                    <p>نخبة من المتخصصين في السلامة المهنية</p>
+                </div>
+
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3>م. خالد العتيبي</h3>
+                        <div class="member-title">مدير إدارة الأمن والسلامة</div>
+                        <div class="member-cert"><i class="fas fa-certificate"></i> NEBOSH International Diploma</div>
+                        <div class="member-cert"><i class="fas fa-certificate"></i> OSHA 30 Hours</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>م. نايف الحربي</h3>
+                        <div class="member-title">أخصائي سلامة أول</div>
+                        <div class="member-cert"><i class="fas fa-certificate"></i> NEBOSH IGC</div>
+                        <div class="member-cert"><i class="fas fa-certificate"></i> IOSH Managing Safely</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>م. فيصل الرشيدي</h3>
+                        <div class="member-title">مفتش سلامة</div>
+                        <div class="member-cert"><i class="fas fa-certificate"></i> OSHA Certificate</div>
+                        <div class="member-cert"><i class="fas fa-certificate"></i> First Aid Instructor</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Safety Standards -->
+        <section class="section standards-section">
+            <div class="container">
+                <div class="section-title">
+                    <div class="title-accent"></div>
+                    <h2>مهام قسم الأمن والسلامة</h2>
+                    <p>نطبق أعلى المعايير لضمان سلامة الجميع</p>
+                </div>
+
+                <div class="standards-grid">
+                    <div class="standard-card">
+                        <i class="fas fa-search"></i>
+                        <h3>التفتيش الدوري</h3>
+                        <p>جولات تفتيشية يومية على جميع المواقع للتأكد من تطبيق إجراءات السلامة</p>
+                    </div>
+                    <div class="standard-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>تحليل المخاطر</h3>
+                        <p>دراسة وتحليل المخاطر المحتملة في كل مرحلة من مراحل المشروع</p>
+                    </div>
+                    <div class="standard-card">
+                        <i class="fas fa-file-alt"></i>
+                        <h3>توثيق الحوادث</h3>
+                        <p>توثيق وتحليل أي حوادث أو إصابات للوقاية من تكرارها مستقبلاً</p>
+                    </div>
+                    <div class="standard-card">
+                        <i class="fas fa-fire-extinguisher"></i>
+                        <h3>خطط الطوارئ</h3>
+                        <p>إعداد خطط طوارئ متكاملة وتجربتها دورياً لضمان الجاهزية</p>
+                    </div>
+                    <div class="standard-card">
+                        <i class="fas fa-first-aid"></i>
+                        <h3>الإسعافات الأولية</h3>
+                        <p>توفير فرق إسعاف ومستلزمات طبية في جميع المواقع</p>
+                    </div>
+                    <div class="standard-card">
+                        <i class="fas fa-recycle"></i>
+                        <h3>السلامة البيئية</h3>
+                        <p>مراقبة الأثر البيئي للمشاريع والتأكد من الالتزام بالمعايير البيئية</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Compliance Section -->
+        <section class="section compliance-section">
+            <div class="container">
+                <div class="compliance-content">
+                    <div class="compliance-text">
+                        <h2>الالتزام بالمعايير السعودية</h2>
+                        <p>نلتزم بتطبيق جميع أنظمة وتعليمات الأمن والسلامة الصادرة من الجهات المختصة في المملكة العربية السعودية.</p>
+                        <ul class="compliance-list">
+                            <li><i class="fas fa-check-circle"></i> نظام السلامة والصحة المهنية الصادر من وزارة الموارد البشرية</li>
+                            <li><i class="fas fa-check-circle"></i> تعليمات الدفاع المدني السعودي</li>
+                            <li><i class="fas fa-check-circle"></i> معايير الهيئة السعودية للمواصفات والمقاييس</li>
+                            <li><i class="fas fa-check-circle"></i> اشتراطات الأمانة والبلديات المحلية</li>
+                        </ul>
+                    </div>
+                    <div class="compliance-stats">
+                        <div class="compliance-stat">
+                            <div class="number">100%</div>
+                            <div class="label">الالتزام بالمعايير</div>
+                        </div>
+                        <div class="compliance-stat">
+                            <div class="number">15</div>
+                            <div class="label">شهادة امتثال سارية</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Training Section -->
+        <section class="section training-section">
+            <div class="container">
+                <div class="section-title">
+                    <div class="title-accent"></div>
+                    <h2>برامجنا التدريبية</h2>
+                    <p>نؤمن بأن التدريب المستمر هو أساس ثقافة السلامة</p>
+                </div>
+
+                <div class="training-grid">
+                    <div class="training-item">
+                        <i class="fas fa-fire-extinguisher"></i>
+                        <h4>مكافحة الحريق</h4>
+                        <p>تدريب عملي على استخدام طفايات الحريق والتصرف في حالات الحرائق</p>
+                    </div>
+                    <div class="training-item">
+                        <i class="fas fa-heartbeat"></i>
+                        <h4>الإسعافات الأولية</h4>
+                        <p>دورات في الإسعافات الأولية والإنعاش القلبي الرئوي</p>
+                    </div>
+                    <div class="training-item">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h4>إجراءات الإخلاء</h4>
+                        <p>تدريب على خطط الإخلاء والتجمع في حالات الطوارئ</p>
+                    </div>
+                    <div class="training-item">
+                        <i class="fas fa-hard-hat"></i>
+                        <h4>استخدام المعدات</h4>
+                        <p>تدريب على الاستخدام الآمن لمعدات وأدوات البناء</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>دقة التخطيط</h3>
+                    <p>شريكك الموثوق في عالم البناء والمقاولات، دقة في التنفيذ والتزام بالجودة منذ 20 عاماً.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="about.html">من نحن</a></li>
+                        <li><a href="services.html">خدماتنا</a></li>
+                        <li><a href="projects.html">المشاريع</a></li>
+                        <li><a href="certificates.html">الشهادات</a></li>
+                        <li><a href="#">الأمن والسلامة</a></li>
+                        <li><a href="#">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>معلومات الاتصال</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> القصيم – البكيرية</p>
+                    <p><i class="fas fa-phone"></i> 050 948 5115</p>
+                    <p><i class="fas fa-envelope"></i> info@deqataltakhtit.com</p>
+                    <p><i class="fas fa-globe"></i> www.deqataltakhtit.com</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 مؤسسة دقة التخطيط للمقاولات. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('show');
+        });
+    </script>
+</body>
+</html>

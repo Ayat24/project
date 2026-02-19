@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الشهادات والاعتمادات - دقة التخطيط للمقاولات</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts (Tajawal for Arabic) -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Lightbox for image gallery -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f9fafb;
+            color: #1e293b;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #b8860b;
+            line-height: 1.2;
+        }
+        .logo span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #4b5563;
+            display: block;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #1e293b;
+            transition: color 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: #b8860b;
+        }
+
+        .lang-switch {
+            background-color: #f3f4f6;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .lang-switch:hover {
+            background-color: #e5e7eb;
+        }
+
+        /* Mobile menu */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #0b1a2e 0%, #1e3a5f 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.pexels.com/photos/7241405/pexels-photo-7241405.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') center/cover no-repeat;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .page-header .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: #e2e8f0;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Section general */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #0b1a2e;
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: #6b7280;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+        }
+
+        .title-accent {
+            width: 80px;
+            height: 4px;
+            background: #b8860b;
+            margin: 0 auto 1.5rem;
+        }
+
+        /* Introduction */
+        .intro-box {
+            background: white;
+            border-radius: 40px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 3rem;
+        }
+
+        .intro-box p {
+            font-size: 1.3rem;
+            line-height: 2;
+            color: #334155;
+        }
+
+        .intro-box strong {
+            color: #b8860b;
+        }
+
+        /* Certificates Grid */
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .certificate-card {
+            background: white;
+            border-radius: 30px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            transition: all 0.3s;
+            border: 1px solid #f1f5f9;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .certificate-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #b8860b, #eab308, #b8860b);
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 40px rgba(184,134,11,0.15);
+            border-color: #b8860b;
+        }
+
+        .certificate-icon {
+            width: 100px;
+            height: 100px;
+            background: #fef3e2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .certificate-card:hover .certificate-icon {
+            background: #b8860b;
+        }
+
+        .certificate-icon i {
+            font-size: 3.5rem;
+            color: #b8860b;
+            transition: all 0.3s;
+        }
+
+        .certificate-card:hover .certificate-icon i {
+            color: white;
+        }
+
+        .certificate-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #0b1a2e;
+        }
+
+        .certificate-issuer {
+            color: #b8860b;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .certificate-date {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .certificate-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: #fef3e2;
+            color: #b8860b;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid #b8860b;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .certificate-badge:hover {
+            background: #b8860b;
+            color: white;
+        }
+
+        /* Accreditation Bodies */
+        .accreditation-section {
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+        }
+
+        .bodies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .body-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            transition: all 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .body-item:hover {
+            transform: scale(1.05);
+            border-color: #b8860b;
+        }
+
+        .body-item i {
+            font-size: 4rem;
+            color: #b8860b;
+            margin-bottom: 1rem;
+        }
+
+        .body-item h4 {
+            font-size: 1.2rem;
+            color: #0b1a2e;
+        }
+
+        /* Classification Card */
+        .classification-section {
+            background: white;
+        }
+
+        .classification-card {
+            background: linear-gradient(135deg, #0b1a2e, #1e3a5f);
+            color: white;
+            border-radius: 50px;
+            padding: 4rem;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .classification-icon {
+            width: 120px;
+            height: 120px;
+            background: #b8860b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+        }
+
+        .classification-icon i {
+            font-size: 4rem;
+            color: white;
+        }
+
+        .classification-card h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .classification-card .degree {
+            font-size: 2rem;
+            color: #b8860b;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .classification-card p {
+            font-size: 1.2rem;
+            color: #e2e8f0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Timeline */
+        .cert-timeline {
+            max-width: 800px;
+            margin: 3rem auto 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+            transition: all 0.3s;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(-10px);
+            box-shadow: 0 20px 30px rgba(184,134,11,0.1);
+        }
+
+        .timeline-year {
+            min-width: 100px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #b8860b;
+        }
+
+        .timeline-content h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content p {
+            color: #6b7280;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0f172a;
+            color: #cbd5e1;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-col p {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col i {
+            color: #b8860b;
+            margin-left: 0.5rem;
+            width: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #b8860b;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .navbar {
+                flex-wrap: wrap;
+            }
+            .nav-menu {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem 0;
+            }
+            .nav-menu.show {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            .classification-card {
+                padding: 2rem;
+            }
+            .classification-card h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .timeline-item {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <h1>دقة التخطيط</h1>
+                    <span>للمقاولات العامة</span>
+                </div>
+                <div class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="about.html">من نحن</a></li>
+                    <li><a href="services.html">خدماتنا</a></li>
+                    <li><a href="projects.html">أعمالنا</a></li>
+                    <li><a href="Certificates.html" class="active">الشهادات</a></li>
+                    <li><a href="Safety.html">الأمن والسلامة</a></li>
+                    <li><a href="Contact.html"> تواصل معنا</a></li>
+                </ul>
+                <button class="lang-switch">English</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1>الشهادات والاعتمادات</h1>
+                <p>شهادات جودة واعتمادات رسمية تثبت كفاءتنا ومصداقيتنا</p>
+            </div>
+        </section>
+
+        <!-- Introduction -->
+        <section class="section" style="padding-top: 2rem;">
+            <div class="container">
+                <div class="intro-box">
+                    <p>
+                        في <strong>مؤسسة دقة التخطيط</strong>، نؤمن بأن الجودة ليست مجرد شعار، بل هي التزام نثبته بشهادات رسمية واعتمادات من كبرى الهيئات المحلية والدولية. حصولنا على هذه الشهادات يعكس مدى التزامنا بتطبيق أعلى المعايير في جميع مشاريعنا.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Certificates Grid -->
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <div class="title-accent"></div>
+                    <h2>شهاداتنا الرئيسية</h2>
+                    <p>أهم الشهادات والاعتمادات التي حصلنا عليها</p>
+                </div>
+
+                <div class="certificates-grid">
+                    <!-- شهادة ISO 9001 -->
+                    <div class="certificate-card">
+                        <div class="certificate-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h3>ISO 9001:2015</h3>
+                        <div class="certificate-issuer">المنظمة الدولية للمعايير</div>
+                        <div class="certificate-date">تاريخ الإصدار: 2022 | تجديد: 2025</div>
+                        <a href="./Assets/20.02.2026_00.23.40_REC.png" class="certificate-badge" data-lightbox="certificates" data-title="ISO 9001:2015 - نظام إدارة الجودة">عرض الشهادة</a>
+                    </div>
+
+                    <!-- شهادة الأيزو 14001 -->
+                    <div class="certificate-card">
+                        <div class="certificate-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3>ISO 14001:2015</h3>
+                        <div class="certificate-issuer">المنظمة الدولية للمعايير</div>
+                        <div class="certificate-date">تاريخ الإصدار: 2021 | تجديد: 2024</div>
+                        <a href="https://images.pexels.com/photos/7241405/pexels-photo-7241405.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="certificate-badge" data-lightbox="certificates" data-title="ISO 14001:2015 - نظام الإدارة البيئية">عرض الشهادة</a>
+                    </div>
+
+                    <!-- شهادة الأيزو 45001 -->
+                    <div class="certificate-card">
+                        <div class="certificate-icon">
+                            <i class="fas fa-hard-hat"></i>
+                        </div>
+                        <h3>ISO 45001:2018</h3>
+                        <div class="certificate-issuer">المنظمة الدولية للمعايير</div>
+                        <div class="certificate-date">تاريخ الإصدار: 2021 | تجديد: 2024</div>
+                        <a href="https://images.pexels.com/photos/7241405/pexels-photo-7241405.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="certificate-badge" data-lightbox="certificates" data-title="ISO 45001:2018 - نظام السلامة والصحة المهنية">عرض الشهادة</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Classification Card -->
+        <section class="section classification-section">
+            <div class="container">
+                <div class="classification-card">
+                    <div class="classification-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h2>تصنيف المؤسسة</h2>
+                    <div class="degree">الدرجة الأولى</div>
+                    <p>معتمدون من وزارة الشؤون البلدية والقروية والإسكان بتصنيف درجة أولى في تخصص المباني والطرق</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Government Accreditations -->
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <div class="title-accent"></div>
+                    <h2>الاعتمادات الحكومية</h2>
+                    <p>جهات حكومية معتمدة لدينا</p>
+                </div>
+
+                <div class="certificates-grid">
+                    <!-- وزارة الإسكان -->
+                    <div class="certificate-card">
+                        <div class="certificate-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h3>وزارة الإسكان</h3>
+                        <div class="certificate-issuer">وزارة الشؤون البلدية والقروية والإسكان</div>
+                        <div class="certificate-date">مقاول معتمد - درجة أولى</div>
+                        <a href="#" class="certificate-badge">رقم الاعتماد: 123456</a>
+                    </div>
+
+                    <!-- أمانة القصيم -->
+                    <div class="certificate-card">
+                        <div class="certificate-icon">
+                            <i class="fas fa-city"></i>
+                        </div>
+                        <h3>أمانة منطقة القصيم</h3>
+                        <div class="certificate-issuer">أمانة القصيم</div>
+                        <div class="certificate-date">مقاول معتمد لدى الأمانة</div>
+                        <a href="#" class="certificate-badge">رقم القيد: 789012</a>
+                    </div>
+
+                    <!-- الهيئة السعودية للمقاولين -->
+                    <div class="certificate-card">
+                        <div class="certificate-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>الهيئة السعودية للمقاولين</h3>
+                        <div class="certificate-issuer">الهيئة السعودية للمقاولين</div>
+                        <div class="certificate-date">عضو عامل منذ 2018</div>
+                        <a href="#" class="certificate-badge">عضوية رقم: 345678</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Accreditation Bodies -->
+        <section class="section accreditation-section">
+            <div class="container">
+                <div class="section-title">
+                    <div class="title-accent"></div>
+                    <h2>جهات الاعتماد</h2>
+                    <p>أهم الجهات التي نتعامل معها ونعتمد منها</p>
+                </div>
+
+                <div class="bodies-grid">
+                    <div class="body-item">
+                        <i class="fas fa-certificate"></i>
+                        <h4>الهيئة السعودية للمواصفات</h4>
+                    </div>
+                    <div class="body-item">
+                        <i class="fas fa-hard-hat"></i>
+                        <h4>وزارة الشؤون البلدية</h4>
+                    </div>
+                    <div class="body-item">
+                        <i class="fas fa-university"></i>
+                        <h4>برنامج جودة الحياة</h4>
+                    </div>
+                    <div class="body-item">
+                        <i class="fas fa-globe"></i>
+                        <h4>المنظمة الدولية للمعايير</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certificates Timeline -->
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <div class="title-accent"></div>
+                    <h2>مسيرة الاعتمادات</h2>
+                    <p>تطور شهاداتنا عبر السنوات</p>
+                </div>
+
+                <div class="cert-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">2018</div>
+                        <div class="timeline-content">
+                            <h4>عضوية الهيئة السعودية للمقاولين</h4>
+                            <p>انضمام المؤسسة كعضو عامل في الهيئة السعودية للمقاولين</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2019</div>
+                        <div class="timeline-content">
+                            <h4>اعتماد وزارة الإسكان</h4>
+                            <p>الحصول على اعتماد وزارة الإسكان كمقاول معتمد</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2021</div>
+                        <div class="timeline-content">
+                            <h4>شهادات الأيزو 14001 & 45001</h4>
+                            <p>الحصول على شهادات الأيزو في البيئة والسلامة المهنية</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2022</div>
+                        <div class="timeline-content">
+                            <h4>شهادة الأيزو 9001</h4>
+                            <p>الحصول على شهادة الأيزو في نظام إدارة الجودة</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2023</div>
+                        <div class="timeline-content">
+                            <h4>تصنيف الدرجة الأولى</h4>
+                            <p>الحصول على تصنيف الدرجة الأولى من وزارة الشؤون البلدية</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>دقة التخطيط</h3>
+                    <p>شريكك الموثوق في عالم البناء والمقاولات، دقة في التنفيذ والتزام بالجودة منذ 20 عاماً.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="about.html">من نحن</a></li>
+                        <li><a href="services.html">خدماتنا</a></li>
+                        <li><a href="projects.html">المشاريع</a></li>
+                        <li><a href="#">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>معلومات الاتصال</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> القصيم – البكيرية</p>
+                    <p><i class="fas fa-phone"></i> 050 948 5115</p>
+                    <p><i class="fas fa-envelope"></i> info@deqataltakhtit.com</p>
+                    <p><i class="fas fa-globe"></i> www.deqataltakhtit.com</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 مؤسسة دقة التخطيط للمقاولات. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('show');
+        });
+
+        // Lightbox options
+        lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true,
+            'albumLabel': 'صورة %1 من %2',
+            'fadeDuration': 300,
+            'imageFadeDuration': 300
+        });
+    </script>
+</body>
+</html>

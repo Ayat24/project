@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أعمالنا - دقة التخطيط للمقاولات</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts (Tajawal for Arabic) -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Lightbox for image gallery -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f9fafb;
+            color: #1e293b;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #b8860b;
+            line-height: 1.2;
+        }
+        .logo span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #4b5563;
+            display: block;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #1e293b;
+            transition: color 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: #b8860b;
+        }
+
+        .lang-switch {
+            background-color: #f3f4f6;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .lang-switch:hover {
+            background-color: #e5e7eb;
+        }
+
+        /* Mobile menu */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #0b1a2e 0%, #1e3a5f 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.pexels.com/photos/159306/construction-site-build-construction-work-159306.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') center/cover no-repeat;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .page-header .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: #e2e8f0;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Section general */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #0b1a2e;
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: #6b7280;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+        }
+
+        .title-accent {
+            width: 80px;
+            height: 4px;
+            background: #b8860b;
+            margin: 0 auto 1.5rem;
+        }
+
+        /* Filter Buttons */
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 2rem;
+            border: 2px solid #e2e8f0;
+            background: white;
+            color: #4b5563;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #b8860b;
+            color: white;
+            border-color: #b8860b;
+        }
+
+        /* Projects Grid - Masonry Style */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            position: relative;
+            border: 1px solid #f1f5f9;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 40px rgba(184,134,11,0.15);
+            border-color: #b8860b;
+        }
+
+        .project-image {
+            position: relative;
+            overflow: hidden;
+            height: 280px;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, transparent 0%, rgba(11,26,46,0.8) 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-category {
+            color: #b8860b;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .project-title {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-location {
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .project-location i {
+            color: #b8860b;
+            margin-left: 0.3rem;
+        }
+
+        .project-description {
+            color: #4b5563;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .project-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #b8860b;
+            font-weight: 600;
+            text-decoration: none;
+            transition: margin-right 0.3s;
+        }
+
+        .project-link i {
+            transition: margin-right 0.3s;
+        }
+
+        .project-link:hover i {
+            margin-right: 5px;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: linear-gradient(135deg, #0b1a2e, #1e3a5f);
+            color: white;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 3rem;
+        }
+
+        .stat-item {
+            flex: 1 1 200px;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #b8860b;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            background-color: white;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 30px;
+            position: relative;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            border-color: #b8860b;
+            box-shadow: 0 20px 30px rgba(184,134,11,0.1);
+        }
+
+        .testimonial-card::before {
+            content: "“";
+            font-size: 5rem;
+            color: #b8860b;
+            position: absolute;
+            top: -1rem;
+            right: 1rem;
+            opacity: 0.2;
+            font-family: serif;
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #334155;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-icon {
+            width: 50px;
+            height: 50px;
+            background: #b8860b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .author-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info p {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0f172a;
+            color: #cbd5e1;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-col p {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col i {
+            color: #b8860b;
+            margin-left: 0.5rem;
+            width: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #b8860b;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .navbar {
+                flex-wrap: wrap;
+            }
+            .nav-menu {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem 0;
+            }
+            .nav-menu.show {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <h1>دقة التخطيط</h1>
+                    <span>للمقاولات العامة</span>
+                </div>
+                <div class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="about.html">من نحن</a></li>
+                    <li><a href="services.html">خدماتنا</a></li>
+                    <li><a href="Projects.html" class="active">أعمالنا</a></li>
+                    <li><a href="Certificates.html">الشهادات</a></li>
+                    <li><a href="Safety.html">الأمن والسلامة</a></li>
+                    <li><a href="Contact.html">تواصل معنا</a></li>
+                </ul>
+                <button class="lang-switch">English</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1>أعمالنا</h1>
+                <p>نفخر بتقديم مجموعة من أبرز مشاريعنا التي تم تنفيذها بأعلى معايير الجودة</p>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <div class="title-accent"></div>
+                    <h2>مشاريعنا المميزة</h2>
+                    <p>نماذج من إنجازاتنا في مختلف المجالات</p>
+                </div>
+
+                <!-- Filter Buttons -->
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">الكل</button>
+                    <button class="filter-btn" data-filter="residential">سكني</button>
+                    <button class="filter-btn" data-filter="infrastructure">بنية تحتية</button>
+                    <button class="filter-btn" data-filter="educational">تعليمي</button>
+                    <button class="filter-btn" data-filter="industrial">صناعي</button>
+                </div>
+
+                <!-- Projects Grid -->
+                <div class="projects-grid" id="projectsGrid">
+                    <!-- مشروع 1: أوقاف الشيخ يوسف العريني -->
+                    <div class="project-card" data-category="residential">
+                        <div class="project-image">
+                            <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="مشروع أوقاف الشيخ يوسف العريني">
+                            <div class="project-overlay">
+                                <div>
+                                    <div class="project-category">مشروع سكني</div>
+                                    <div class="project-title">أوقاف الشيخ يوسف العريني</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-location"><i class="fas fa-map-marker-alt"></i> البدائع - منطقة القصيم</div>
+                            <p class="project-description">مجمع سكني متكامل يضم 12 وحدة سكنية بمواصفات عالية الجودة، مع مساحات خضراء ومرافق ترفيهية.</p>
+                            <a href="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="project-link" data-lightbox="projects" data-title="أوقاف الشيخ يوسف العريني - البدائع">عرض المشروع <i class="fas fa-arrow-left"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- مشروع 2: مدرسة نموذج 18/2 -->
+                    <div class="project-card" data-category="educational">
+                        <div class="project-image">
+                            <img src="https://images.pexels.com/photos/256490/pexels-photo-256490.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="مدرسة نموذج 18/2">
+                            <div class="project-overlay">
+                                <div>
+                                    <div class="project-category">مشروع تعليمي</div>
+                                    <div class="project-title">مدرسة نموذج 18/2</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-location"><i class="fas fa-map-marker-alt"></i> القصيم</div>
+                            <p class="project-description">مدرسة حكومية نموذجية تضم 18 فصلاً دراسياً، مع معامل مجهزة ومرافق رياضية وفق أحدث المعايير التعليمية.</p>
+                            <a href="https://images.pexels.com/photos/256490/pexels-photo-256490.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="project-link" data-lightbox="projects" data-title="مدرسة نموذج 18/2 - القصيم">عرض المشروع <i class="fas fa-arrow-left"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- مشروع 3: صيانة طرق البكيرية -->
+                    <div class="project-card" data-category="infrastructure">
+                        <div class="project-image">
+                            <img src="https://images.pexels.com/photos/262367/pexels-photo-262367.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="صيانة طرق محافظة البكيرية">
+                            <div class="project-overlay">
+                                <div>
+                                    <div class="project-category">بنية تحتية</div>
+                                    <div class="project-title">صيانة طرق البكيرية</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-location"><i class="fas fa-map-marker-alt"></i> محافظة البكيرية</div>
+                            <p class="project-description">مشروع صيانة وتأهيل شبكة الطرق الداخلية في محافظة البكيرية بطول 15 كم، مع تحسينات إنارة وعلامات أرضية.</p>
+                            <a href="https://images.pexels.com/photos/262367/pexels-photo-262367.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="project-link" data-lightbox="projects" data-title="صيانة طرق محافظة البكيرية">عرض المشروع <i class="fas fa-arrow-left"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- مشروع 4: مجمع سكني بالقصيم -->
+                    <div class="project-card" data-category="residential">
+                        <div class="project-image">
+                            <img src="https://images.pexels.com/photos/280221/pexels-photo-280221.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="مجمع سكني">
+                            <div class="project-overlay">
+                                <div>
+                                    <div class="project-category">مشروع سكني</div>
+                                    <div class="project-title">مجمع سكني بالقصيم</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-location"><i class="fas fa-map-marker-alt"></i> القصيم</div>
+                            <p class="project-description">مجمع سكني فاخر يضم 25 فيلا سكنية بتصاميم عصرية، مع خدمات متكاملة ومسطحات خضراء.</p>
+                            <a href="https://images.pexels.com/photos/280221/pexels-photo-280221.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="project-link" data-lightbox="projects" data-title="مجمع سكني بالقصيم">عرض المشروع <i class="fas fa-arrow-left"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- مشروع 5: مصنع بلاستيك بالمدينة الصناعية -->
+                    <div class="project-card" data-category="industrial">
+                        <div class="project-image">
+                            <img src="https://images.pexels.com/photos/66989/pexels-photo-66989.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="مصنع بلاستيك">
+                            <div class="project-overlay">
+                                <div>
+                                    <div class="project-category">مشروع صناعي</div>
+                                    <div class="project-title">مصنع بلاستيك</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-location"><i class="fas fa-map-marker-alt"></i> المدينة الصناعية - القصيم</div>
+                            <p class="project-description">إنشاء مصنع لإنتاج المواد البلاستيكية على مساحة 10,000 م²، يشمل خطوط إنتاج ومستودعات ومكاتب إدارية.</p>
+                            <a href="https://images.pexels.com/photos/66989/pexels-photo-66989.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="project-link" data-lightbox="projects" data-title="مصنع بلاستيك بالمدينة الصناعية">عرض المشروع <i class="fas fa-arrow-left"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- مشروع 6: شبكات مياه وصرف صحي -->
+                    <div class="project-card" data-category="infrastructure">
+                        <div class="project-image">
+                            <img src="https://images.pexels.com/photos/257743/pexels-photo-257743.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="شبكات مياه">
+                            <div class="project-overlay">
+                                <div>
+                                    <div class="project-category">بنية تحتية</div>
+                                    <div class="project-title">شبكات مياه وصرف صحي</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-location"><i class="fas fa-map-marker-alt"></i> عدة مناطق</div>
+                            <p class="project-description">تنفيذ مشاريع شبكات المياه والصرف الصحي لعدد من الأحياء الجديدة، بطول إجمالي 25 كم.</p>
+                            <a href="https://images.pexels.com/photos/257743/pexels-photo-257743.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="project-link" data-lightbox="projects" data-title="شبكات مياه وصرف صحي">عرض المشروع <i class="fas fa-arrow-left"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="section stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">+150</div>
+                        <div class="stat-label">مشروع منجز</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">+50</div>
+                        <div class="stat-label">عميل دائم</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">+15</div>
+                        <div class="stat-label">مشروع حكومي</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">نسبة النجاح</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="section testimonials-section">
+            <div class="container">
+                <div class="section-title">
+                    <div class="title-accent"></div>
+                    <h2>ماذا قالوا عنا؟</h2>
+                    <p>آراء عملائنا في مشاريعنا</p>
+                </div>
+
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">مؤسسة دقة التخطيط أثبتت كفاءة عالية في تنفيذ مشروع أوقاف الشيخ يوسف العريني. التزامهم بالمواعيد ودقتهم في التنفيذ كانت مميزة.</p>
+                        <div class="testimonial-author">
+                            <div class="author-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h4>الشيخ عبدالله العريني</h4>
+                                <p>ناظر وقف العريني</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">نشكر فريق دقة التخطيط على جهودهم في مشروع مدرسة 18/2. العمل كان احترافياً والنتيجة مبهرة. نتمنى لهم التوفيق.</p>
+                        <div class="testimonial-author">
+                            <div class="author-icon">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div class="author-info">
+                                <h4>د. خالد السليم</h4>
+                                <p>مدير تعليم القصيم سابقاً</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">من أفضل شركات المقاولات التي تعاملت معها. دقة في المواعيد، جودة في التنفيذ، وأمانة في العمل. يستحقون الثقة.</p>
+                        <div class="testimonial-author">
+                            <div class="author-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h4>م. فهد المشيقح</h4>
+                                <p>استشاري هندسي</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>دقة التخطيط</h3>
+                    <p>شريكك الموثوق في عالم البناء والمقاولات، دقة في التنفيذ والتزام بالجودة منذ 20 عاماً.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="about.html">من نحن</a></li>
+                        <li><a href="services.html">خدماتنا</a></li>
+                        <li><a href="#">أعمالنا</a></li>
+                        <li><a href="#">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>معلومات الاتصال</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> القصيم – البكيرية</p>
+                    <p><i class="fas fa-phone"></i> 050 948 5115</p>
+                    <p><i class="fas fa-envelope"></i> info@deqataltakhtit.com</p>
+                    <p><i class="fas fa-globe"></i> www.deqataltakhtit.com</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 مؤسسة دقة التخطيط للمقاولات. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('show');
+        });
+
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+
+                const filterValue = button.getAttribute('data-filter');
+
+                projectCards.forEach(card => {
+                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Lightbox options
+        lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true,
+            'albumLabel': 'صورة %1 من %2',
+            'fadeDuration': 300,
+            'imageFadeDuration': 300
+        });
+    </script>
+</body>
+</html>
